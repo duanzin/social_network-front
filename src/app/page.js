@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { AuthForm, AuthInput, AuthButton } from "./styleIndex";
+import { AuthForm, AuthInput, Button } from "./styleIndex";
 import { signIn, signUp } from "./api/route";
 
 export default function Login() {
@@ -11,6 +11,7 @@ export default function Login() {
     name: "",
     pfp: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -18,6 +19,7 @@ export default function Login() {
       [name]: value,
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -74,7 +76,7 @@ export default function Login() {
               value={formData.pfp}
               onChange={handleChange}
             />
-            <AuthButton type="submit">Sign up</AuthButton>
+            <Button type="submit">Sign up</Button>
             <button
               type="button"
               class="text-normal text-lg text-[#1DA1F2]"
@@ -85,7 +87,7 @@ export default function Login() {
           </>
         ) : (
           <>
-            <AuthButton type="submit">Log in</AuthButton>
+            <Button type="submit">Log in</Button>
             <button
               type="button"
               class="text-normal text-lg text-[#1DA1F2]"
