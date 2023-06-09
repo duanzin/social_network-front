@@ -1,9 +1,13 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { AuthForm, AuthInput, Button } from "./styleIndex";
 import { signIn, signUp } from "./api/route";
+import { useGlobalContext } from "./Context/context";
 
 export default function Login() {
+  const { push } = useRouter();
+  const { token, setToken } = useGlobalContext();
   const [signupPage, setSignupPage] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -24,13 +28,13 @@ export default function Login() {
     e.preventDefault();
     try {
       if (signupPage) {
-        const user = await signUp(formData);
-        console.log(user);
+        await signUp(formData);
         setSignupPage(false);
       } else {
         const user = await signIn(formData);
         console.log(user);
-        setSignupPage(true);
+        setToken(user);
+        push("/home");
       }
     } catch (error) {
       alert(error);
@@ -40,7 +44,7 @@ export default function Login() {
   return (
     <>
       <AuthForm onSubmit={handleSubmit}>
-        <h1 class="text-black text-4xl font-black">Social Network</h1>
+        <h1 className="text-black text-4xl font-black">Social Network</h1>
         <AuthInput
           name="email"
           type="email"
@@ -79,7 +83,7 @@ export default function Login() {
             <Button type="submit">Sign up</Button>
             <button
               type="button"
-              class="text-normal text-lg text-[#1DA1F2]"
+              className="text-normal text-lg text-[#1DA1F2]"
               onClick={() => setSignupPage(false)}
             >
               Already have an account? Login now!
@@ -90,7 +94,7 @@ export default function Login() {
             <Button type="submit">Log in</Button>
             <button
               type="button"
-              class="text-normal text-lg text-[#1DA1F2]"
+              className="text-normal text-lg text-[#1DA1F2]"
               onClick={() => setSignupPage(true)}
             >
               Don't have an account yet? Sign up now!
