@@ -7,7 +7,7 @@ import { useGlobalContext } from "./Context/context";
 
 export default function Login() {
   const { push } = useRouter();
-  const { token, setToken } = useGlobalContext();
+  const { setToken } = useGlobalContext();
   const [signupPage, setSignupPage] = useState(false);
   const [formData, setFormData] = useState({
     email: "",

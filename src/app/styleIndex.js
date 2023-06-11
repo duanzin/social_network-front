@@ -9,12 +9,13 @@ export const AuthInput = w.input(
 );
 export const Button = w.button(
   `bg-[#1DA1F2] border-none rounded-[76px] font-bold
-    text-lg text-white text-center`,
+    text-lg text-white text-center disabled:opacity-50`,
   {
     variants: {
       size: {
         big: `w-[450px] h-[60px]`,
         medium: `w-56 h-12`,
+        small: `w-20 h-10`,
       },
     },
     defaultVariants: {

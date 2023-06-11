@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }) {
       <main className="flex flex-col gap-y-px w-[600px] h-fit bg-[#EBEEF0] mr-7 ml-7 px-px">
         {children}
       </main>
-      <aside className="w-[350px] flex flex-col items-start bg-[#F7F9FA] rounded-2xl p-4">
+      <aside className="w-[350px] h-fit flex flex-col items-start bg-[#F7F9FA] rounded-2xl p-4">
         <StyledH2>You might like</StyledH2>
         <ul className="flex flex-col w-full my-5 gap-y-5">
           <li className="flex flex-row justify-between items-center">

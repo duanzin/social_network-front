@@ -1,4 +1,5 @@
 import { StyledH2, StyledH3, ProfileImg } from "@/app/styleIndex";
+import PostCreation from "../post/postCreation";
 
 const array = [
   {
@@ -25,13 +26,14 @@ const array = [
 export default function Home() {
   return (
     <>
-      <header className="flex justify-start items-center bg-[#FFFFFF] h-14 px-4">
+      <header className="flex justify-start items-center bg-white h-14 px-4">
         <StyledH2>Home</StyledH2>
       </header>
+      <PostCreation />
       {array.map((post) => (
         <article
           key={post.id}
-          className="flex flex-row bg-[#FFFFFF] px-4 py-2.5 gap-x-2.5"
+          className="flex flex-row bg-white px-4 py-2.5 gap-x-2.5"
         >
           <ProfileImg src={post.pfp} alt="profile picture" />
           <div className="flex flex-col">
