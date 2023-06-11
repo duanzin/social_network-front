@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { submitPost } from "./api/route";
 import { ProfileImg, Button } from "../../styleIndex";
 import { useGlobalContext } from "@/app/Context/context";
 
 export default function PostCreation() {
+  const { push } = useRouter();
   const { token } = useGlobalContext();
   const [content, setContent] = useState("");
   const [disable, setDisable] = useState(true);
@@ -24,7 +26,8 @@ export default function PostCreation() {
     e.preventDefault();
     try {
       setDisable(true);
-      await submitPost(content, token);
+      await submitPost({content: content}, token);
+      setContent("");
       push("/home");
     } catch (error) {
       alert(error);
@@ -35,7 +38,7 @@ export default function PostCreation() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-row bg-white px-4 py-2.5 mb-2.5 gap-x-2.5 w-full min-h-32 h-auto"
+      className="flex flex-row bg-white px-4 py-2.5 gap-x-2.5 w-full min-h-32 h-auto"
     >
       <ProfileImg
         src="https://image.api.playstation.com/vulcan/img/cfn/11307uYG0CXzRuA9aryByTHYrQLFz-HVQ3VVl7aAysxK15HMpqjkAIcC_R5vdfZt52hAXQNHoYhSuoSq_46_MT_tDBcLu49I.png"
