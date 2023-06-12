@@ -8,3 +8,12 @@ export async function submitPost(body, token) {
   });
   return res.data;
 }
+
+export async function getAllPosts(token) {
+  const res = await axios.get(`/post`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.data;
+}
