@@ -5,7 +5,8 @@ export const AuthForm = w.form(
 );
 export const AuthInput = w.input(
   `w-[450px] h-[70px] pl-5 bg-white border border-solid rounded-md
-    border-gray-500 placeholder:text-lg placeholder:text-black/60 placeholder:font-normal`
+    border-gray-500 placeholder:text-lg placeholder:text-black/60
+    placeholder:font-normal focus:outline-none`
 );
 export const Button = w.button(
   `bg-[#1DA1F2] border-none rounded-[76px] font-bold
@@ -23,6 +24,6 @@ export const Button = w.button(
     },
   }
 );
-export const StyledH2 = w.h2(`font-bold text-xl text-[#0F1419]`);
-export const StyledH3 = w.h3(`font-bold text-base text-[#0F1419]`);
+export const StyledH1 = w.h1(`font-bold text-xl text-[#0F1419]`);
+export const StyledH2 = w.h2(`font-bold text-base text-[#0F1419]`);
 export const ProfileImg = w.img(`w-12 h-12 rounded-full`);

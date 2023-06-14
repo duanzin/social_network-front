@@ -3,8 +3,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/:slug*",
-        destination: "http://localhost:5000/:slug*",
+        source: "/:slug([A-Za-z0-9]+)*",
+        destination: "http://localhost:5000/:slug([A-Za-z0-9]+)*",
       },
     ];
   },

@@ -32,7 +32,6 @@ export default function Login() {
         setSignupPage(false);
       } else {
         const user = await signIn(formData);
-        console.log(user);
         setToken(user);
         push("/home");
       }

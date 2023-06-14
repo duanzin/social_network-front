@@ -1,7 +1,10 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const GlobalContext = createContext({ token: "", setToken: () => {} });
+const GlobalContext = createContext({
+  token: "",
+  setToken: () => {},
+});
 
 export const GlobalContextProvider = ({ children }) => {
   const [token, setToken] = useState("");

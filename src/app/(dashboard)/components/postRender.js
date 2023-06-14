@@ -1,18 +1,32 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ProfileImg, StyledH3 } from "../../styleIndex";
+import { usePathname } from "next/navigation";
+import { ProfileImg, StyledH2 } from "../../styleIndex";
 import { useGlobalContext } from "@/app/Context/context";
-import { getAllPosts } from "./api/route";
+import { getAllPosts, getUserData } from "./api/route";
 
 export default function PostRender() {
   const { token } = useGlobalContext();
+  const url = usePathname();
+  const hasProfileSubstring = url.includes("profile");
+  const userId = hasProfileSubstring ? parseInt(url.split("/")[2], 10) : null;
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     if (token) {
       const fetchData = async () => {
         try {
-          const postArray = await getAllPosts(token);
+          let postArray;
+          if (userId) {
+            postArray = await getAllPosts(token, userId);
+          } else {
+            if (hasProfileSubstring) {
+              const { id } = await getUserData(token);
+              postArray = await getAllPosts(token, id);
+            } else {
+              postArray = await getAllPosts(token);
+            }
+          }
           setPosts(postArray);
         } catch (error) {
           alert(error);
@@ -20,7 +34,7 @@ export default function PostRender() {
       };
       fetchData();
     }
-  }, [token]);
+  }, [token, userId, hasProfileSubstring]);
 
   return (
     <>
@@ -31,7 +45,7 @@ export default function PostRender() {
         >
           <ProfileImg src={post.users.pfp} alt="profile picture" />
           <div className="flex flex-col">
-            <StyledH3>{post.users.name}</StyledH3>
+            <StyledH2>{post.users.name}</StyledH2>
             <p className="text-base font-medium">{post.content}</p>
           </div>
         </article>
