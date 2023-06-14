@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { ProfileImg, StyledH2 } from "../../styleIndex";
 import { useGlobalContext } from "@/app/Context/context";
 import { getAllPosts, getUserData } from "./api/route";
+import Link from "next/link";
 
 export default function PostRender() {
   const { token } = useGlobalContext();
@@ -20,12 +21,7 @@ export default function PostRender() {
           if (userId) {
             postArray = await getAllPosts(token, userId);
           } else {
-            if (hasProfileSubstring) {
-              const { id } = await getUserData(token);
-              postArray = await getAllPosts(token, id);
-            } else {
-              postArray = await getAllPosts(token);
-            }
+            postArray = await getAllPosts(token);
           }
           setPosts(postArray);
         } catch (error) {
@@ -34,7 +30,7 @@ export default function PostRender() {
       };
       fetchData();
     }
-  }, [token, userId, hasProfileSubstring]);
+  }, [token, hasProfileSubstring, userId]);
 
   return (
     <>
@@ -45,8 +41,13 @@ export default function PostRender() {
         >
           <ProfileImg src={post.users.pfp} alt="profile picture" />
           <div className="flex flex-col">
-            <StyledH2>{post.users.name}</StyledH2>
-            <p className="text-base font-medium">{post.content}</p>
+            <Link
+              href={`/profile/${post.users.id}`}
+              className="font-bold text-base text-[#0F1419] w-fit"
+            >
+              {post.users.name}
+            </Link>
+            <p className="text-base font-medium break-all">{post.content}</p>
           </div>
         </article>
       ))}

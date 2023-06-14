@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function submitPost(body, token) {
-  const res = await axios.post(`/post`, body, {
+  const res = await axios.post(`${process.env.NEXT_PUBLIC_DB_PORT}/post`, body, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -11,14 +11,14 @@ export async function submitPost(body, token) {
 
 export async function getAllPosts(token, id) {
   if (id) {
-    const res = await axios.get(`/post/${id}`, {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_PORT}/post/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     return res.data;
   } else {
-    const res = await axios.get(`/post`, {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_PORT}/post`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -28,7 +28,7 @@ export async function getAllPosts(token, id) {
 }
 
 export async function getUserData(token) {
-  const res = await axios.get(`/user`, {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_PORT}/user`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

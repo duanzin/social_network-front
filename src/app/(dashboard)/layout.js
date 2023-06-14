@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "../styleIndex";
+import ProfileLink from "./components/profileLink";
 
 export default function DashboardLayout({ children }) {
   return (
@@ -16,13 +17,7 @@ export default function DashboardLayout({ children }) {
           <ion-icon name="home-outline" className="text-3xl"></ion-icon>
           Home
         </Link>
-        <Link
-          href="/profile"
-          className="flex gap-x-5 items-center font-bold text-lg text-[#0F1419] w-fit"
-        >
-          <ion-icon name="person-outline" className="text-3xl"></ion-icon>
-          Profile
-        </Link>
+        <ProfileLink />
         <Button type="button" size="medium">
           Post
         </Button>
