@@ -1,10 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
-import { ProfileImg, StyledH2 } from "../../styleIndex";
+import { ProfileImg } from "../../styleIndex";
 import { useGlobalContext } from "@/app/Context/context";
-import { getAllPosts, getUserData } from "./api/route";
+import { getAllPosts } from "./api/route";
 import Link from "next/link";
+import TimePassed from "./timePassed";
 
 export default function PostRender() {
   const { token } = useGlobalContext();
@@ -13,24 +14,25 @@ export default function PostRender() {
   const userId = hasProfileSubstring ? parseInt(url.split("/")[2], 10) : null;
   const [posts, setPosts] = useState([]);
 
+  const fetchData = useCallback(async () => {
+    try {
+      let postArray;
+      if (userId) {
+        postArray = await getAllPosts(token, userId);
+      } else {
+        postArray = await getAllPosts(token);
+      }
+      setPosts(postArray);
+    } catch (error) {
+      alert(error);
+    }
+  }, [token, userId]);
+
   useEffect(() => {
     if (token) {
-      const fetchData = async () => {
-        try {
-          let postArray;
-          if (userId) {
-            postArray = await getAllPosts(token, userId);
-          } else {
-            postArray = await getAllPosts(token);
-          }
-          setPosts(postArray);
-        } catch (error) {
-          alert(error);
-        }
-      };
       fetchData();
     }
-  }, [token, hasProfileSubstring, userId]);
+  }, [token, fetchData]);
 
   return (
     <>
@@ -46,6 +48,7 @@ export default function PostRender() {
               className="font-bold text-base text-[#0F1419] w-fit"
             >
               {post.users.name}
+              <TimePassed dateTime={post.createdAt} />
             </Link>
             <p className="text-base font-medium break-all">{post.content}</p>
           </div>

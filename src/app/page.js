@@ -5,7 +5,7 @@ import { AuthForm, AuthInput, Button } from "./styleIndex";
 import { signIn, signUp } from "./api/route";
 import { useGlobalContext } from "./Context/context";
 
-export default function Login() {
+export default function Page() {
   const { push } = useRouter();
   const { setToken } = useGlobalContext();
   const [signupPage, setSignupPage] = useState(false);
