@@ -47,8 +47,7 @@ export default function PostRender() {
               href={`/profile/${post.users.id}`}
               className="font-bold text-base text-[#0F1419] w-fit"
             >
-              {post.users.name}
-              <TimePassed dateTime={post.createdAt} />
+              {post.users.name} <TimePassed dateTime={post.createdAt} />
             </Link>
             <p className="text-base font-medium break-all">{post.content}</p>
           </div>

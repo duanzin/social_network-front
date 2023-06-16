@@ -8,6 +8,7 @@ Before anything, remember to set up the [back end](https://github.com/duanzin/so
 ```
 npm i
 ```
+To connect to the back end, create an `.env.local` file based on the `.env.example`
 ## Running the project
 
 To start the code, run the following command

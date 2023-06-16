@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthForm, AuthInput, Button } from "./styleIndex";
 import { signIn, signUp } from "./api/route";
@@ -9,6 +9,7 @@ export default function Page() {
   const { push } = useRouter();
   const { setToken } = useGlobalContext();
   const [signupPage, setSignupPage] = useState(false);
+  const [disable, setDisable] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -27,8 +28,10 @@ export default function Page() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setDisable(true);
       if (signupPage) {
         await signUp(formData);
+        setDisable(false);
         setSignupPage(false);
       } else {
         const user = await signIn(formData);
@@ -36,6 +39,7 @@ export default function Page() {
         push("/home");
       }
     } catch (error) {
+      setDisable(false);
       alert(error);
     }
   };
@@ -79,7 +83,9 @@ export default function Page() {
               value={formData.pfp}
               onChange={handleChange}
             />
-            <Button type="submit">Sign up</Button>
+            <Button type="submit" disabled={disable}>
+              Sign up
+            </Button>
             <button
               type="button"
               className="text-normal text-lg text-[#1DA1F2]"
@@ -90,7 +96,9 @@ export default function Page() {
           </>
         ) : (
           <>
-            <Button type="submit">Log in</Button>
+            <Button type="submit" disabled={disable}>
+              Log in
+            </Button>
             <button
               type="button"
               className="text-normal text-lg text-[#1DA1F2]"
