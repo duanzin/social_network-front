@@ -3,24 +3,28 @@ import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { ProfileImg } from "../../styleIndex";
 import { useGlobalContext } from "@/app/Context/context";
-import { getAllPosts } from "./api/route";
+import { getPosts, getFeedPosts } from "./api/route";
 import Link from "next/link";
 import TimePassed from "./timePassed";
 
 export default function PostRender() {
   const { token } = useGlobalContext();
   const url = usePathname();
-  const hasProfileSubstring = url.includes("profile");
-  const userId = hasProfileSubstring ? parseInt(url.split("/")[2], 10) : null;
+  const userId = url.includes("profile")
+    ? parseInt(url.split("/")[2], 10)
+    : null;
+  const feed = url.includes("feed");
   const [posts, setPosts] = useState([]);
 
   const fetchData = useCallback(async () => {
     try {
       let postArray;
-      if (userId) {
-        postArray = await getAllPosts(token, userId);
+      if (feed) {
+        postArray = await getFeedPosts(token);
+      } else if (userId) {
+        postArray = await getPosts(token, userId);
       } else {
-        postArray = await getAllPosts(token);
+        postArray = await getPosts(token);
       }
       setPosts(postArray);
     } catch (error) {

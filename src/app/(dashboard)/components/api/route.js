@@ -13,10 +13,19 @@ export async function submitPost(body, token) {
   return res.data;
 }
 
-export async function getAllPosts(token, id) {
+export async function getPosts(token, id) {
   let url = "/post";
   if (id) url += `/${id}`;
   const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_PORT}${url}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.data;
+}
+
+export async function getFeedPosts(token) {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_PORT}/post/followed`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -32,6 +41,18 @@ export async function getUserData(token, id) {
       Authorization: `Bearer ${token}`,
     },
   });
+  return res.data;
+}
+
+export async function getRelationship(token, id) {
+  const res = await axios.get(
+    `${process.env.NEXT_PUBLIC_DB_PORT}/user/relationship/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return res.data;
 }
 

@@ -18,6 +18,13 @@ export default function DashboardLayout({ children }) {
           Home
         </Link>
         <ProfileLink />
+        <Link
+          href="/feed"
+          className="flex gap-x-5 items-center font-bold text-lg text-[#0F1419] w-fit"
+        >
+          <span className="text-3xl">#</span>
+          Feed
+        </Link>
         <Button type="button" size="medium">
           Post
         </Button>
