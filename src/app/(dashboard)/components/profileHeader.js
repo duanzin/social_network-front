@@ -8,6 +8,7 @@ import Follow from "./followButton";
 export default function ProfileHeader({ id }) {
   const { token } = useGlobalContext();
   const [profile, setProfile] = useState({});
+  const [showFollow, setShowFollow] = useState(true);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -21,6 +22,7 @@ export default function ProfileHeader({ id }) {
         try {
           const userInfo = await getUserData(token, id);
           const formattedDate = formatDate(userInfo.createdAt);
+          if (userInfo.profileOwner) setShowFollow(false);
           setProfile({ ...userInfo, createdAt: formattedDate });
         } catch (error) {
           alert(error);
@@ -52,7 +54,7 @@ export default function ProfileHeader({ id }) {
             Joined {profile.createdAt}
           </span>
         </div>
-        <Follow token={token} id={id} />
+        {showFollow && <Follow token={token} id={id} />}
       </div>
     </section>
   );

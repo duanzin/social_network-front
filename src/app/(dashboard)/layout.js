@@ -1,20 +1,20 @@
 import Link from "next/link";
 import { Button } from "../styleIndex";
 import ProfileLink from "./components/profileLink";
+import { HomeIcon, GlobeAltIcon } from "@heroicons/react/24/outline";
 
 export default function DashboardLayout({ children }) {
   return (
     <>
       <nav className="flex flex-col gap-y-7 pt-4">
         <p className="flex items-center text-lg font-semibold gap-x-1">
-          inspired by
-          <ion-icon name="logo-twitter" className="text-3xl"></ion-icon>
+          inspired by Twitter
         </p>
         <Link
           href="/home"
           className="flex gap-x-5 items-center font-bold text-lg text-[#0F1419] w-fit"
         >
-          <ion-icon name="home-outline" className="text-3xl"></ion-icon>
+          <HomeIcon className="h-8 w-8"></HomeIcon>
           Home
         </Link>
         <ProfileLink />
@@ -22,7 +22,7 @@ export default function DashboardLayout({ children }) {
           href="/feed"
           className="flex gap-x-5 items-center font-bold text-lg text-[#0F1419] w-fit"
         >
-          <span className="text-3xl">#</span>
+          <GlobeAltIcon className="h-8 w-8"></GlobeAltIcon>
           Feed
         </Link>
         <Button type="button" size="medium">

@@ -6,7 +6,7 @@ export default function Feed() {
   return (
     <>
       <header className="flex justify-start items-center bg-white h-14 px-4">
-        <StyledH1>My Feed</StyledH1>
+        <StyledH1>Global Feed</StyledH1>
       </header>
       <PostCreation />
       <PostRender />

@@ -24,7 +24,7 @@ export async function getPosts(token, id) {
   return res.data;
 }
 
-export async function getFeedPosts(token) {
+export async function getHomePosts(token) {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_PORT}/post/followed`, {
     headers: {
       Authorization: `Bearer ${token}`,

@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { ProfileImg } from "../../styleIndex";
 import { useGlobalContext } from "@/app/Context/context";
-import { getPosts, getFeedPosts } from "./api/route";
+import { getPosts, getHomePosts } from "./api/route";
 import Link from "next/link";
 import TimePassed from "./timePassed";
 
@@ -13,14 +13,14 @@ export default function PostRender() {
   const userId = url.includes("profile")
     ? parseInt(url.split("/")[2], 10)
     : null;
-  const feed = url.includes("feed");
+  const home = url.includes("home");
   const [posts, setPosts] = useState([]);
 
   const fetchData = useCallback(async () => {
     try {
       let postArray;
-      if (feed) {
-        postArray = await getFeedPosts(token);
+      if (home) {
+        postArray = await getHomePosts(token);
       } else if (userId) {
         postArray = await getPosts(token, userId);
       } else {
@@ -40,23 +40,27 @@ export default function PostRender() {
 
   return (
     <>
-      {posts.map((post) => (
-        <article
-          key={post.id}
-          className="flex flex-row bg-white w-full px-4 py-2.5 gap-x-2.5"
-        >
-          <ProfileImg src={post.users.pfp} alt="profile picture" />
-          <div className="flex flex-col">
-            <Link
-              href={`/profile/${post.users.id}`}
-              className="font-bold text-base text-[#0F1419] w-fit"
-            >
-              {post.users.name} <TimePassed dateTime={post.createdAt} />
-            </Link>
-            <p className="text-base font-medium break-all">{post.content}</p>
-          </div>
-        </article>
-      ))}
+      {posts.length === 0 ? (
+        <div className="bg-white w-full py-2.5 mb-px text-center text-xl text-[#5B7083]">Nothing has been posted yet :(</div>
+      ) : (
+        posts.map((post) => (
+          <article
+            key={post.id}
+            className="flex flex-row bg-white w-full px-4 py-2.5 gap-x-2.5"
+          >
+            <ProfileImg src={post.users.pfp} alt="profile picture" />
+            <div className="flex flex-col">
+              <Link
+                href={`/profile/${post.users.id}`}
+                className="font-bold text-base text-[#0F1419] w-fit"
+              >
+                {post.users.name} <TimePassed dateTime={post.createdAt} />
+              </Link>
+              <p className="text-base font-medium break-all">{post.content}</p>
+            </div>
+          </article>
+        ))
+      )}
     </>
   );
 }
