@@ -47,7 +47,7 @@ export default function PostCreation() {
         className="resize-none w-full h-auto text-base font-medium placeholder:text-xl placeholder:text-[#5B7083] focus:outline-none"
       ></textarea>
       <Button type="submit" size="small" disabled={disable}>
-        post
+        Post
       </Button>
     </form>
   );

@@ -53,6 +53,9 @@ export default function ProfileHeader({ id }) {
           <span className="text-base text-[#5B7083] font-medium">
             Joined {profile.createdAt}
           </span>
+          <span className="text-base text-[#5B7083] font-medium">
+            {profile.following} Following {profile.followers} Followers
+          </span>
         </div>
         {showFollow && <Follow token={token} id={id} />}
       </div>

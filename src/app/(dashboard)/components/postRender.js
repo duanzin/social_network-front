@@ -41,7 +41,7 @@ export default function PostRender() {
   return (
     <>
       {posts.length === 0 ? (
-        <div className="bg-white w-full py-2.5 mb-px text-center text-xl text-[#5B7083]">Nothing has been posted yet :(</div>
+        <div className="bg-white w-full py-2.5 text-center text-xl text-[#5B7083]">Nothing has been posted yet :(</div>
       ) : (
         posts.map((post) => (
           <article
