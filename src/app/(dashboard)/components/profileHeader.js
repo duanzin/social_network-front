@@ -34,7 +34,7 @@ export default function ProfileHeader({ id }) {
 
   return (
     <section className="relative flex flex-col w-full h-auto bg-white">
-      <header className="flex justify-start items-center w-full h-14 px-4">
+      <header className="sticky top-0 z-10 flex justify-start items-center w-full h-14 px-4 bg-white">
         <StyledH1>{profile.name}</StyledH1>
       </header>
       <div className="w-full">

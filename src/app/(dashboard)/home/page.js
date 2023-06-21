@@ -1,13 +1,13 @@
-import { StyledH1 } from "@/app/styleIndex";
+import { StyledH1, PageHeader } from "@/app/styleIndex";
 import PostCreation from "../components/postForm";
 import PostRender from "../components/postRender";
 
 export default function Home() {
   return (
     <>
-      <header className="flex justify-start items-center bg-white h-14 px-4">
+      <PageHeader>
         <StyledH1>Home</StyledH1>
-      </header>
+      </PageHeader>
       <PostCreation />
       <PostRender />
     </>

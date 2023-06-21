@@ -31,3 +31,4 @@ export const Button = w.button(
 export const StyledH1 = w.h1(`font-bold text-xl text-[#0F1419]`);
 export const StyledH2 = w.h2(`font-bold text-base text-[#0F1419]`);
 export const ProfileImg = w.img(`w-12 h-12 rounded-full`);
+export const PageHeader = w.header(`sticky top-0 z-10 flex justify-start items-center bg-white h-14 px-4`);

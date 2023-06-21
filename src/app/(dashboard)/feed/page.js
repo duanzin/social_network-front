@@ -1,13 +1,13 @@
-import { StyledH1 } from "@/app/styleIndex";
+import { StyledH1, PageHeader } from "@/app/styleIndex";
 import PostRender from "../components/postRender";
 import PostCreation from "../components/postForm";
 
 export default function Feed() {
   return (
     <>
-      <header className="flex justify-start items-center bg-white h-14 px-4">
+      <PageHeader>
         <StyledH1>Global Feed</StyledH1>
-      </header>
+      </PageHeader>
       <PostCreation />
       <PostRender />
     </>
