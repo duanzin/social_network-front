@@ -26,6 +26,7 @@ export default function PostCreation() {
       setDisable(true);
       await submitPost({ content: content }, token);
       setContent("");
+      window.location.reload();
     } catch (error) {
       alert(error);
       setDisable(false);

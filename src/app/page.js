@@ -29,6 +29,7 @@ export default function Page() {
     e.preventDefault();
     try {
       setDisable(true);
+      if (signupPage && formData.pfp === "") delete formData.pfp;
       if (signupPage) {
         await signUp(formData);
         setDisable(false);
@@ -78,8 +79,7 @@ export default function Page() {
             <AuthInput
               name="pfp"
               type="text"
-              placeholder="Profile picture url"
-              required
+              placeholder="Profile picture url(optional)"
               value={formData.pfp}
               onChange={handleChange}
             />
