@@ -35,8 +35,8 @@ export default function Page() {
         setDisable(false);
         setSignupPage(false);
       } else {
-        const user = await signIn(formData);
-        setToken(user);
+        const { token } = await signIn(formData);
+        setToken(token);
         push("/home");
       }
     } catch (error) {
