@@ -31,6 +31,8 @@ export default function Page() {
       setDisable(true);
       if (signupPage && formData.pfp === "") delete formData.pfp;
       if (signupPage) {
+        if (formData.name.trim() === "")
+          throw new Error("Username cannot be empty or contain only spaces.");
         await signUp(formData);
         setDisable(false);
         setSignupPage(false);
@@ -73,6 +75,7 @@ export default function Page() {
               type="text"
               placeholder="Username"
               required
+              maxlength="20"
               value={formData.name}
               onChange={handleChange}
             />
