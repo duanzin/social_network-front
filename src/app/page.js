@@ -48,70 +48,68 @@ export default function Page() {
   };
 
   return (
-    <>
-      <AuthForm onSubmit={handleSubmit}>
-        <h1 className="text-black text-4xl font-black">Social Network</h1>
-        <AuthInput
-          name="email"
-          type="email"
-          placeholder="Email"
-          required
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <AuthInput
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          minLength="6"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        {signupPage ? (
-          <>
-            <AuthInput
-              name="name"
-              type="text"
-              placeholder="Username"
-              required
-              maxlength="20"
-              value={formData.name}
-              onChange={handleChange}
-            />
-            <AuthInput
-              name="pfp"
-              type="text"
-              placeholder="Profile picture url(optional)"
-              value={formData.pfp}
-              onChange={handleChange}
-            />
-            <Button type="submit" disabled={disable}>
-              Sign up
-            </Button>
-            <button
-              type="button"
-              className="text-normal text-lg text-[#1DA1F2]"
-              onClick={() => setSignupPage(false)}
-            >
-              Already have an account? Login now!
-            </button>
-          </>
-        ) : (
-          <>
-            <Button type="submit" disabled={disable}>
-              Log in
-            </Button>
-            <button
-              type="button"
-              className="text-normal text-lg text-[#1DA1F2]"
-              onClick={() => setSignupPage(true)}
-            >
-              Don't have an account yet? Sign up now!
-            </button>
-          </>
-        )}
-      </AuthForm>
-    </>
+    <AuthForm onSubmit={handleSubmit}>
+      <h1 className="text-black text-4xl font-black">Social Network</h1>
+      <AuthInput
+        name="email"
+        type="email"
+        placeholder="Email"
+        required
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <AuthInput
+        name="password"
+        type="password"
+        placeholder="Password"
+        required
+        minLength="6"
+        value={formData.password}
+        onChange={handleChange}
+      />
+      {signupPage ? (
+        <>
+          <AuthInput
+            name="name"
+            type="text"
+            placeholder="Username"
+            required
+            maxlength="20"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          <AuthInput
+            name="pfp"
+            type="text"
+            placeholder="Profile picture url(optional)"
+            value={formData.pfp}
+            onChange={handleChange}
+          />
+          <Button type="submit" disabled={disable}>
+            Sign up
+          </Button>
+          <button
+            type="button"
+            className="text-normal text-lg text-[#1DA1F2]"
+            onClick={() => setSignupPage(false)}
+          >
+            Already have an account? Login now!
+          </button>
+        </>
+      ) : (
+        <>
+          <Button type="submit" disabled={disable}>
+            Log in
+          </Button>
+          <button
+            type="button"
+            className="text-normal text-lg text-[#1DA1F2]"
+            onClick={() => setSignupPage(true)}
+          >
+            Don't have an account yet? Sign up now!
+          </button>
+        </>
+      )}
+    </AuthForm>
   );
 }

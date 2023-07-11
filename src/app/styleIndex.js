@@ -1,10 +1,10 @@
 import { w } from "windstitch";
 
 export const AuthForm = w.form(
-  `flex flex-col justify-center items-center m-auto mt-[130px] gap-y-6`
+  `flex flex-col justify-center items-center mt-[10vmin] gap-y-6`
 );
 export const AuthInput = w.input(
-  `w-[450px] h-[70px] pl-5 bg-white border border-solid rounded-md
+  `w-96 max-[413px]:w-4/5 h-14 pl-5 bg-white border border-solid rounded-md
     border-gray-500 placeholder:text-lg placeholder:text-black/60
     placeholder:font-normal focus:outline-none`
 );
@@ -13,7 +13,7 @@ export const Button = w.button(
   {
     variants: {
       size: {
-        big: `w-[450px] h-[60px]`,
+        big: `w-96 max-[413px]:w-4/5 h-14`,
         medium: `w-56 h-12`,
         small: `w-auto px-4 h-10`,
       },
