@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useGlobalContext } from "@/app/Context/context";
 import Link from "next/link";
 import { getUserData } from "./api/route";
-import { UserIcon } from '@heroicons/react/24/outline';
+import { UserIcon } from "@heroicons/react/24/outline";
+import { LinkText } from "@/app/styleIndex";
 
 export default function ProfileLink() {
   const { token } = useGlobalContext();
@@ -28,7 +29,7 @@ export default function ProfileLink() {
       className="flex gap-x-5 items-center font-bold text-lg text-[#0F1419] w-fit"
     >
       <UserIcon className="h-8 w-8"></UserIcon>
-      Profile
+      <LinkText>Profile</LinkText>
     </Link>
   );
 }

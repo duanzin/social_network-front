@@ -14,7 +14,7 @@ export const Button = w.button(
     variants: {
       size: {
         big: `w-96 max-[413px]:w-4/5 h-14`,
-        medium: `w-56 h-12`,
+        medium: `w-56 h-12 px-4 leading-none max-[768px]:w-full`,
         small: `w-auto px-4 h-10`,
       },
       color: {
@@ -31,4 +31,5 @@ export const Button = w.button(
 export const StyledH1 = w.h1(`font-bold text-xl text-[#0F1419]`);
 export const StyledH2 = w.h2(`font-bold text-base text-[#0F1419]`);
 export const ProfileImg = w.img(`w-12 h-12 rounded-full`);
-export const PageHeader = w.header(`sticky top-0 z-10 flex justify-start items-center bg-white h-14 px-4`);
+export const PageHeader = w.header(`sticky top-0 z-10 flex justify-start max-[571px]:justify-center items-center bg-white h-14 px-4`);
+export const LinkText = w.p(`font-bold text-lg text-[#0F1419] max-[571px]:hidden`);

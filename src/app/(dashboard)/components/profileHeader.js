@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { StyledH1 } from "@/app/styleIndex";
+import { StyledH1, PageHeader } from "@/app/styleIndex";
 import { useGlobalContext } from "@/app/Context/context";
 import { getUserData } from "./api/route";
 import Follow from "./followButton";
@@ -8,7 +8,7 @@ import Follow from "./followButton";
 export default function ProfileHeader({ id }) {
   const { token } = useGlobalContext();
   const [profile, setProfile] = useState({});
-  const [showFollow, setShowFollow] = useState(true);
+  const [showFollow, setShowFollow] = useState(false);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -22,7 +22,7 @@ export default function ProfileHeader({ id }) {
         try {
           const userInfo = await getUserData(token, id);
           const formattedDate = formatDate(userInfo.createdAt);
-          if (userInfo.profileOwner) setShowFollow(false);
+          if (!userInfo.profileOwner) setShowFollow(true);
           setProfile({ ...userInfo, createdAt: formattedDate });
         } catch (error) {
           alert(error);
@@ -34,9 +34,9 @@ export default function ProfileHeader({ id }) {
 
   return (
     <section className="relative flex flex-col w-full h-auto bg-white">
-      <header className="sticky top-0 z-10 flex justify-start items-center w-full h-14 px-4 bg-white">
+      <PageHeader>
         <StyledH1>{profile.name}</StyledH1>
-      </header>
+      </PageHeader>
       <div className="w-full">
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJwebMHlKXrA1Xig_Mk1EXRELjDMfD4LaVCA&usqp=CAU"
