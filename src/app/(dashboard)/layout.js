@@ -7,8 +7,6 @@ import {
   UsersIcon,
   PencilIcon,
 } from "@heroicons/react/24/outline";
-import { Suspense } from "react";
-import Loading from "./loading";
 
 export default function DashboardLayout({ children }) {
   return (
@@ -39,7 +37,7 @@ export default function DashboardLayout({ children }) {
         </nav>
       </aside>
       <main className="flex flex-col gap-y-px w-[600px] h-fit bg-[#EBEEF0] px-px pb-px mb-14 min-[572px]:mr-5">
-        <Suspense fallback={<Loading />}>{children}</Suspense>
+        {children}
       </main>
       <footer className="fixed bottom-0 z-10 bg-white border-t min-[572px]:hidden">
         <nav className="flex flex-row justify-between w-screen h-14 px-4">

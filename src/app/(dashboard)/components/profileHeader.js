@@ -43,7 +43,7 @@ export default function ProfileHeader({ id }) {
           className="w-full h-52"
         ></img>
         <img
-          src={profile.pfp}
+          src={profile.pfp || "https://pbs.twimg.com/media/FRynXImUcAAGFWk?format=png&name=360x360"}
           className="absolute bottom-24 left-3 w-[139px] h-[139px] rounded-full border-4 border-solid border-white"
         ></img>
       </div>
