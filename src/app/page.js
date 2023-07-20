@@ -10,6 +10,7 @@ export default function Page() {
   const { setToken } = useGlobalContext();
   const [signupPage, setSignupPage] = useState(false);
   const [disable, setDisable] = useState(false);
+  const [errors, setErrors] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -43,7 +44,7 @@ export default function Page() {
       }
     } catch (error) {
       setDisable(false);
-      alert(error);
+      setErrors(error.response.data.message);
     }
   };
 
@@ -110,6 +111,7 @@ export default function Page() {
           </button>
         </>
       )}
+      {errors && <span className="text-red-500">{errors}</span>}
     </AuthForm>
   );
 }
