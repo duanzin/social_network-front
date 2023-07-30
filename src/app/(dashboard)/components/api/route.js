@@ -1,22 +1,18 @@
-import axios from "axios";
+import api from "./api";
 
 export async function submitPost(body, token) {
-  const res = await axios.post(
-    `${process.env.NEXT_PUBLIC_DB_PORT}/post`,
-    body,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const res = await api.post(`/post`, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 }
 
 export async function getPosts(token, id) {
   let url = "/post";
   if (id) url += `/${id}`;
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_PORT}${url}`, {
+  const res = await api.get(`${url}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -25,21 +21,18 @@ export async function getPosts(token, id) {
 }
 
 export async function getHomePosts(token) {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_DB_PORT}/post/followed`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const res = await api.get(`/post/followed`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 }
 
 export async function getUserData(token, id) {
   let url = "/user";
   if (id) url += `/${id}`;
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_PORT}${url}`, {
+  const res = await api.get(`${url}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -48,7 +41,7 @@ export async function getUserData(token, id) {
 }
 
 export async function getAllUsers(token) {
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_DB_PORT}/user/all`, {
+  const res = await api.get(`/user/all`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -57,26 +50,19 @@ export async function getAllUsers(token) {
 }
 
 export async function getRelationship(token, id) {
-  const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_DB_PORT}/relationship/${id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const res = await api.get(`/relationship/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 }
 
 export async function followOrUnfollow(token, id) {
-  const res = await axios.post(
-    `${process.env.NEXT_PUBLIC_DB_PORT}/relationship`,
-    id,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const res = await api.post(`/relationship`, id, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.data;
 }

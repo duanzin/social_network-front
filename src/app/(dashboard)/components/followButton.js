@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/app/styleIndex";
 import { followOrUnfollow, getRelationship } from "./api/route";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Follow({ token, id }) {
   const [followed, setFollowed] = useState(false);
@@ -22,7 +24,7 @@ export default function Follow({ token, id }) {
       }
     } catch (error) {
       setDisable(false);
-      alert(error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -44,14 +46,17 @@ export default function Follow({ token, id }) {
   }, [token, id]);
 
   return (
-    <Button
-      type="button"
-      size="small"
-      color={followed ? "transparent" : "blue"}
-      onClick={handleClick}
-      disabled={disable}
-    >
-      {followed ? "Unfollow" : "Follow"}
-    </Button>
+    <>
+      <ToastContainer />
+      <Button
+        type="button"
+        size="small"
+        color={followed ? "transparent" : "blue"}
+        onClick={handleClick}
+        disabled={disable}
+      >
+        {followed ? "Unfollow" : "Follow"}
+      </Button>
+    </>
   );
 }

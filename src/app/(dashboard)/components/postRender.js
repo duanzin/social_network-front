@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import { ProfileImg } from "../../styleIndex";
 import { useGlobalContext } from "@/app/Context/context";
 import { getPosts, getHomePosts } from "./api/route";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import TimePassed from "./timePassed";
 import Loading from "./postLoading";
@@ -31,7 +33,8 @@ export default function PostRender() {
       setPosts(postArray);
       setShouldRender(true);
     } catch (error) {
-      alert(error);
+      toast.error(error.response.data.message);
+      setShouldRender(true);
     }
   }, [token, userId]);
 
@@ -43,6 +46,7 @@ export default function PostRender() {
 
   return (
     <>
+      <ToastContainer />
       {shouldRender ? (
         posts.length === 0 ? (
           <div className="bg-white w-full py-2.5 text-center text-xl text-[#5B7083]">
@@ -70,7 +74,7 @@ export default function PostRender() {
           ))
         )
       ) : (
-        <>{Array(6).fill(<Loading />)}</>
+        <>{Array(11).fill(<Loading />)}</>
       )}
     </>
   );

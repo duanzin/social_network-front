@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { getAllUsers } from "./api/route";
 import { useGlobalContext } from "@/app/Context/context";
 import { StyledH2, ProfileImg } from "@/app/styleIndex";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
-
 
 export default function UserRender() {
   const { token } = useGlobalContext();
@@ -17,7 +18,7 @@ export default function UserRender() {
           const usersData = await getAllUsers(token);
           setUsers(usersData);
         } catch (error) {
-          alert(error);
+          toast.error(error.response.data.message);
         }
       };
       fetchData();
@@ -26,6 +27,7 @@ export default function UserRender() {
 
   return (
     <>
+      <ToastContainer />
       {users.length === 0 ? (
         <div className="bg-white w-full py-2.5 mb-px text-center text-xl text-[#5B7083]">
           There's no one here :(

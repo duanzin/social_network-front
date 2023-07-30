@@ -3,6 +3,8 @@ import { useState } from "react";
 import { submitPost } from "./api/route";
 import { Button } from "../../styleIndex";
 import { useGlobalContext } from "@/app/Context/context";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function PostCreation() {
   const { token } = useGlobalContext();
@@ -28,28 +30,31 @@ export default function PostCreation() {
       setContent("");
       window.location.reload();
     } catch (error) {
-      alert(error);
+      toast.error(error.response.data.message);
       setDisable(false);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col flex-wrap items-end justify-between bg-white px-4 py-2.5 gap-y-2 w-full min-h-32 h-auto"
-    >
-      <textarea
-        name="content"
-        placeholder="What’s happening?"
-        maxLength="150"
-        required
-        value={content}
-        onChange={handleChange}
-        className="resize-none w-full h-auto text-base font-medium placeholder:text-xl placeholder:text-[#5B7083] focus:outline-none"
-      ></textarea>
-      <Button type="submit" size="small" disabled={disable}>
-        Post
-      </Button>
-    </form>
+    <>
+      <ToastContainer />
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col flex-wrap items-end justify-between bg-white px-4 py-2.5 gap-y-2 w-full min-h-32 h-auto"
+      >
+        <textarea
+          name="content"
+          placeholder="What’s happening?"
+          maxLength="150"
+          required
+          value={content}
+          onChange={handleChange}
+          className="resize-none w-full h-auto text-base font-medium placeholder:text-xl placeholder:text-[#5B7083] focus:outline-none"
+        ></textarea>
+        <Button type="submit" size="small" disabled={disable}>
+          Post
+        </Button>
+      </form>
+    </>
   );
 }
