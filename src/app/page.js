@@ -15,6 +15,7 @@ export default function Page() {
     email: "",
     password: "",
     name: "",
+    userName: "",
     pfp: "",
   });
 
@@ -32,8 +33,10 @@ export default function Page() {
       setDisable(true);
       if (signupPage && formData.pfp === "") delete formData.pfp;
       if (signupPage) {
-        if (formData.name.trim() === "")
-          throw new Error("Username cannot be empty or contain only spaces.");
+        if (formData.name.trim() === "" || formData.userName.trim() === "")
+          throw new Error(
+            "Name and Username cannot be empty or contain only spaces."
+          );
         await signUp(formData);
         setDisable(false);
         setSignupPage(false);
@@ -73,10 +76,20 @@ export default function Page() {
           <AuthInput
             name="name"
             type="text"
-            placeholder="Username"
+            placeholder="Name"
             required
-            maxlength="20"
+            maxLength="40"
             value={formData.name}
+            onChange={handleChange}
+          />
+          <AuthInput
+            name="userName"
+            type="text"
+            placeholder="Username(can't change)"
+            required
+            minLength="4"
+            maxLength="20"
+            value={formData.userName}
             onChange={handleChange}
           />
           <AuthInput
