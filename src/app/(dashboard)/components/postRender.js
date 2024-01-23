@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import TimePassed from "./timePassed";
 import Loading from "./postLoading";
+import { HeartIcon } from "@heroicons/react/24/outline";
 
 export default function PostRender() {
   const { token } = useGlobalContext();
@@ -56,8 +57,9 @@ export default function PostRender() {
           posts.map((post) => (
             <article
               key={post.id}
-              className="flex flex-row bg-white w-full px-4 py-2.5 gap-x-2.5"
+              className="flex flex-col bg-white w-full px-4 py-2.5"
             >
+              <div className="flex flex-row w-full gap-x-2.5">
               <ProfileImg src={post.users.pfp} alt="profile picture" />
               <div className="flex flex-col">
                 <Link
@@ -69,6 +71,11 @@ export default function PostRender() {
                 <p className="text-base font-medium break-all">
                   {post.content}
                 </p>
+              </div>
+              </div>
+              <div className="flex flex-row items-center text-lg">
+                <HeartIcon className="h-6 w-6 cursor-pointer"></HeartIcon>
+                {post.likes.length}
               </div>
             </article>
           ))
